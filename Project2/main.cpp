@@ -12,7 +12,7 @@
 #include <glm/gtc/type_ptr.hpp>
 
 // Vertex Shader source code
-const GLchar* vertexSource = R"ANYTHING(
+/*const GLchar* vertexSource = R"ANYTHING(
    #version 330 core
 layout (location = 0) in vec3 position;
 layout (location = 1) in vec3 color;
@@ -36,9 +36,10 @@ const GLchar* fragmentSource = R"glsl(
     void main() {
         outColor = vec4(Color, 1.0);
     }
-)glsl";
+)glsl";*/
 
 int main(int argc, char* argv[]) {
+
 
     Vertex vertices[] = {
             Vertex(glm::vec3(-0.5f, -0.5f, 0.0f), glm::vec3(1.0f, 0.0f, 0.0f)),
@@ -51,8 +52,10 @@ int main(int argc, char* argv[]) {
 
     SDLManager* sdlManager = new SDLManager();
 
+
+
     // Create a new shader manager from the heap
-    ShaderManager* myShader = new ShaderManager(vertexSource, fragmentSource);
+    ShaderManager* myShader = new ShaderManager("/Users/emirhankilic/Desktop/3.1/mte391/project/MTE391_Project2/Project2/Shaders/default.vert", "/Users/emirhankilic/Desktop/3.1/mte391/project/MTE391_Project2/Project2/Shaders/default.frag");
 
     myShader->run();
 
@@ -67,7 +70,7 @@ int main(int argc, char* argv[]) {
         sdlManager->handleEvents(&running, transform);
 
         // Clear the screen
-        glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+        glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
         // Draw the rectangle
