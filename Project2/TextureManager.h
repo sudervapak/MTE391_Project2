@@ -1,20 +1,21 @@
-#ifndef TEXTUREMANAGER_H
-#define TEXTUREMANAGER_H
-
-#include <string>
+#pragma once
 #include <GL/glew.h>
+#include <string>
+#include <SDL.h>
+#include <SDL_image.h>
+#include <iostream>
 
-// TextureManager class handles the loading and binding of textures.
 class TextureManager {
 public:
-    // Loads a texture from a file path.
-    GLuint LoadTexture(const std::string& texturePath);
+    TextureManager();
+    ~TextureManager();
 
-    // Binds a texture for rendering.
-    void UseTexture(GLuint textureId);
+    GLuint loadTexture(const std::string& filePath);
 
-    // Deletes a texture to free resources.
-    void DeleteTexture(GLuint textureId);
+    void bindTexture(GLuint textureUnit);
+
+private:
+    GLuint textureID;
 };
 
-#endif // TEXTUREMANAGER_H
+

@@ -24,6 +24,10 @@ BufferManager::BufferManager(Vertex vertices[], GLuint numOfvertices) {
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, vertexSize, (void*)offsetof(Vertex, color));
     glEnableVertexAttribArray(1);
 
+    // BURAYI EKLEDİM SADECE /Vertex Attribute
+    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, vertexSize, (void*)offsetof(Vertex, texture));
+    glEnableVertexAttribArray(2);
+
 
 }
 void BufferManager::BindVAO(){
