@@ -16,7 +16,7 @@ SDLManager::SDLManager() {
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 
     // Create a window
-    window = SDL_CreateWindow("PROJECT2", 100, 100,1000, 800, SDL_WINDOW_OPENGL);
+    window = SDL_CreateWindow("PROJECT2", 100, 100,1200, 800, SDL_WINDOW_OPENGL);
     if (window == nullptr) {
         std::cerr << "SDL_CreateWindow Error: " << SDL_GetError() << std::endl;
         SDL_Quit();

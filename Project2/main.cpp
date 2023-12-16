@@ -13,61 +13,66 @@
 #include <SDL_image.h>
 #include "TextureManager.h"
 
-
 int main(int argc, char* argv[]) {
-
-
-    Vertex vertices[] = {
+    // First Rectangle
+    Vertex vertices1[] = {
             Vertex(glm::vec3(-0.5f, -0.5f, 0.0f), glm::vec3(1.0f, 0.0f, 0.0f), glm::vec2(1.0f, 1.0f)),
             Vertex(glm::vec3(0.5f, -0.5f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f), glm::vec2(0.0f, 1.0f)),
             Vertex(glm::vec3(0.5f, 0.5f, 0.0f), glm::vec3(0.0f, 0.0f, 1.0f), glm::vec2(0.0f, 0.0f)),
             Vertex(glm::vec3(-0.5f, 0.5f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec2(1.0f, 0.0f)),
     };
 
-    Transform* transform = new Transform();
+    // Second Rectangle
+    Vertex vertices2[] = {
+            Vertex(glm::vec3(-0.5f, -0.5f, 0.0f), glm::vec3(0.0f, 1.0f, 1.0f), glm::vec2(1.0f, 1.0f)),
+            Vertex(glm::vec3(0.5f, -0.5f, 0.0f), glm::vec3(1.0f, 0.0f, 1.0f), glm::vec2(0.0f, 1.0f)),
+            Vertex(glm::vec3(0.5f, 0.5f, 0.0f), glm::vec3(1.0f, 1.0f, 0.0f), glm::vec2(0.0f, 0.0f)),
+            Vertex(glm::vec3(-0.5f, 0.5f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec2(1.0f, 0.0f)),
+    };
+
+    Transform* transform1 = new Transform();
+    Transform* transform2 = new Transform();
 
     SDLManager* sdlManager = new SDLManager();
 
-
-
-    // Create a new shader manager from the heap
     ShaderManager* myShader = new ShaderManager("/Users/emirhankilic/Desktop/3.1/mte391/project/MTE391_Project2/Project2/Shaders/default.vert", "/Users/emirhankilic/Desktop/3.1/mte391/project/MTE391_Project2/Project2/Shaders/default.frag");
 
+    BufferManager* rectangleBuffer1 = new BufferManager(vertices1, 4);
+    BufferManager* rectangleBuffer2 = new BufferManager(vertices2, 4);
 
+    TextureManager* textureManager1 = new TextureManager();
+    textureManager1->loadTexture("/Users/emirhankilic/Desktop/3.1/mte391/project/MTE391_Project2/Project2/Shaders/cat.jpg");  // Replace with the actual path to the first texture
+    textureManager1->bindTexture(0);
 
-    BufferManager* rectangleBuffer = new BufferManager(vertices, 4);
-
-    TextureManager* textureManager = new TextureManager();
-    textureManager->loadTexture("/Users/emirhankilic/Desktop/3.1/mte391/project/MTE391_Project2/Project2/Shaders/cat.jpg");
-    textureManager->bindTexture(0);
-
-    GLuint tex0Uni = glGetUniformLocation(myShader->getProgramId(), "tex0");
-    myShader->run();
-    glUniform1i(tex0Uni, 0);
-
+    TextureManager* textureManager2 = new TextureManager();
+    textureManager2->loadTexture("/Users/emirhankilic/Desktop/3.1/mte391/project/MTE391_Project2/Project2/Shaders/cat2.jpg");  // Replace with the actual path to the second texture
+    textureManager2->bindTexture(1);
 
     // Main loop
-    glm::vec3 offset = glm::vec3(0.0f, 0.0f, 0.0f);
     float speed = 0.01f; // Movement speed
     bool running = true;
     while (running) {
-
-        sdlManager->handleEvents(&running, transform);
+        sdlManager->handleEvents(&running, transform1);
 
         // Clear the screen
         glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        // Draw the rectangle
+        // Draw the first rectangle
         GLint modelLoc = glGetUniformLocation(myShader->getProgramId(), "model");
+        glm::mat4 model1 = transform1->GetModelMatrix();
+        glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model1));
+        textureManager1->bindTexture(0);
+        rectangleBuffer1->BindVAO();
+        glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
+        glBindVertexArray(0);
 
-        glm::mat4 model = transform->GetModelMatrix();
-        glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-
-        textureManager->bindTexture(0);
-
-
-        rectangleBuffer->BindVAO();
+        // Draw the second rectangle
+        modelLoc = glGetUniformLocation(myShader->getProgramId(), "model");
+        glm::mat4 model2 = transform2->GetModelMatrix();
+        glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model2));
+        textureManager2->bindTexture(0);
+        rectangleBuffer2->BindVAO();
         glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
         glBindVertexArray(0);
 
@@ -77,7 +82,8 @@ int main(int argc, char* argv[]) {
 
     // Clean up
     delete myShader;
-    delete rectangleBuffer;
+    delete rectangleBuffer1;
+    delete rectangleBuffer2;
     delete sdlManager;
 
     return 0;
