@@ -2,25 +2,23 @@
 #define RENDERER_H
 
 #include <GL/glew.h>
-#include <SDL.h>
+#include <glm/glm.hpp>
+#include "ShaderManager.h"
+#include "BufferManager.h"
+#include "TextureManager.h"
+#include "Transform.h"
+#include <glm/gtc/type_ptr.hpp>
 
-// Renderer class handles the basic rendering operations using OpenGL.
 class Renderer {
 public:
     Renderer();
     ~Renderer();
 
-    // Initializes the renderer with the SDL window.
-    void Initialize(SDL_Window* window);
-
-    // Renders a frame. This is called every loop iteration in the main game loop.
-    void RenderFrame();
-
-    // Cleans up OpenGL context and resources.
-    void Cleanup();
+    void init();
+    void render(Transform* transform, BufferManager* buffer, TextureManager* textureManager);
 
 private:
-    SDL_GLContext glContext; // The OpenGL context associated with the SDL window.
+    ShaderManager* shader;
 };
 
 #endif // RENDERER_H

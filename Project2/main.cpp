@@ -12,6 +12,7 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <SDL_image.h>
 #include "TextureManager.h"
+#include "Renderer.h"
 
 int main(int argc, char* argv[]) {
     // First Rectangle
@@ -35,8 +36,6 @@ int main(int argc, char* argv[]) {
 
     SDLManager* sdlManager = new SDLManager();
 
-    ShaderManager* myShader = new ShaderManager("/Users/emirhankilic/Desktop/3.1/mte391/project/MTE391_Project2/Project2/Shaders/default.vert", "/Users/emirhankilic/Desktop/3.1/mte391/project/MTE391_Project2/Project2/Shaders/default.frag");
-
     BufferManager* rectangleBuffer1 = new BufferManager(vertices1, 4);
     BufferManager* rectangleBuffer2 = new BufferManager(vertices2, 4);
 
@@ -48,6 +47,10 @@ int main(int argc, char* argv[]) {
     textureManager2->loadTexture("/Users/emirhankilic/Desktop/3.1/mte391/project/MTE391_Project2/Project2/Shaders/cat2.jpg");  // Replace with the actual path to the second texture
     textureManager2->bindTexture(1);
 
+    // Create a renderer instance and initialize it
+    Renderer* renderer = new Renderer();
+    renderer->init();
+
     // Main loop
     float speed = 0.01f; // Movement speed
     bool running = true;
@@ -58,33 +61,19 @@ int main(int argc, char* argv[]) {
         glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        // Draw the first rectangle
-        GLint modelLoc = glGetUniformLocation(myShader->getProgramId(), "model");
-        glm::mat4 model1 = transform1->GetModelMatrix();
-        glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model1));
-        textureManager1->bindTexture(0);
-        rectangleBuffer1->BindVAO();
-        glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
-        glBindVertexArray(0);
+        // Draw the first rectangle using the renderer
+        renderer->render(transform1, rectangleBuffer1, textureManager1);
 
-        // Draw the second rectangle
-        modelLoc = glGetUniformLocation(myShader->getProgramId(), "model");
-        glm::mat4 model2 = transform2->GetModelMatrix();
-        glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model2));
-        textureManager2->bindTexture(0);
-        rectangleBuffer2->BindVAO();
-        glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
-        glBindVertexArray(0);
+        // Draw the second rectangle using the renderer
+        renderer->render(transform2, rectangleBuffer2, textureManager2);
 
         // Swap buffers
         sdlManager->swap();
     }
 
     // Clean up
-    delete myShader;
-    delete rectangleBuffer1;
-    delete rectangleBuffer2;
-    delete sdlManager;
+    delete renderer;
+    // Your existing cleanup code...
 
     return 0;
 }
