@@ -25,10 +25,10 @@ int main(int argc, char* argv[]) {
 
     // Second Rectangle
     Vertex vertices2[] = {
-            Vertex(glm::vec3(-0.5f, -0.5f, 0.0f), glm::vec3(0.0f, 1.0f, 1.0f), glm::vec2(1.0f, 1.0f)),
-            Vertex(glm::vec3(0.5f, -0.5f, 0.0f), glm::vec3(1.0f, 0.0f, 1.0f), glm::vec2(0.0f, 1.0f)),
-            Vertex(glm::vec3(0.5f, 0.5f, 0.0f), glm::vec3(1.0f, 1.0f, 0.0f), glm::vec2(0.0f, 0.0f)),
-            Vertex(glm::vec3(-0.5f, 0.5f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec2(1.0f, 0.0f)),
+            Vertex(glm::vec3(-0.25f, -0.25f, 0.0f), glm::vec3(0.0f, 1.0f, 1.0f), glm::vec2(1.0f, 1.0f)),
+            Vertex(glm::vec3(0.25f, -0.25f, 0.0f), glm::vec3(1.0f, 0.0f, 1.0f), glm::vec2(0.0f, 1.0f)),
+            Vertex(glm::vec3(0.25f, 0.25f, 0.0f), glm::vec3(1.0f, 1.0f, 0.0f), glm::vec2(0.0f, 0.0f)),
+            Vertex(glm::vec3(-0.25f, 0.25f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec2(1.0f, 0.0f)),
     };
 
     Transform* transform1 = new Transform();
@@ -55,7 +55,7 @@ int main(int argc, char* argv[]) {
     float speed = 0.01f; // Movement speed
     bool running = true;
     while (running) {
-        sdlManager->handleEvents(&running, transform1);
+        sdlManager->handleEvents(&running, transform1, transform2);
 
         // Clear the screen
         glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
@@ -73,7 +73,6 @@ int main(int argc, char* argv[]) {
 
     // Clean up
     delete renderer;
-    // Your existing cleanup code...
 
     return 0;
 }

@@ -11,7 +11,7 @@ class SDLManager
 	public:
 		SDLManager();//initial Setup
 		~SDLManager();//final wrap up
-		void handleEvents(bool* running,Transform * transform);// keyboard input etc
+		void handleEvents(bool* running,Transform * transform, Transform* transform1);// keyboard input etc
 		SDL_Window* getWindow();
 		void swap();
 	private:

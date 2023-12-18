@@ -60,7 +60,7 @@ SDL_Window*  SDLManager:: getWindow(){
 
 }
 
-void SDLManager::handleEvents(bool * running, Transform* transform) {
+void SDLManager::handleEvents(bool * running, Transform* transform, Transform* transform1) {
 
     SDL_Event event;
     while (SDL_PollEvent(&event)) {
@@ -69,6 +69,7 @@ void SDLManager::handleEvents(bool * running, Transform* transform) {
         }
         if (event.type == SDL_KEYDOWN) {
             transform->HandleKeyInput(event.key.keysym.sym);
+            transform1->HandleKeyInput1(event.key.keysym.sym);
         }
     }
 

@@ -13,6 +13,7 @@ public:
         const glm::vec3& scale = glm::vec3(1.0f));
 
     void HandleKeyInput(SDL_Keycode key);
+    void HandleKeyInput1(SDL_Keycode key);
     const glm::mat4 GetModelMatrix() ;
 
 private:

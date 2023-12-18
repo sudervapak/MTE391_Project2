@@ -57,6 +57,24 @@ void Transform::HandleKeyInput(SDL_Keycode key) {
 }
 
 
+void Transform::HandleKeyInput1(SDL_Keycode key) {
+    switch (key) {
+        case SDLK_w:
+            Translate(glm::vec3(0.0f, 0.1f, 0.0f));
+            break;
+        case SDLK_s:
+            Translate(glm::vec3(0.0f, -0.1f, -0.0f));
+            break;
+        case SDLK_a:
+            Translate(glm::vec3(-0.1f, 0.0f, 0.0f));
+            break;
+        case SDLK_d:
+            Translate(glm::vec3(0.1f, 0.0f, 0.0f));
+            break;
+
+    }
+}
+
 void Transform::Translate(const glm::vec3& delta) {
     
     position += delta;
