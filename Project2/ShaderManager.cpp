@@ -14,7 +14,7 @@ std::string get_file_contents(const char* filename)
         in.close();
         return(contents);
     }
-    std::cerr << "Error opening file: " << strerror(errno) << std::endl;
+  //  std::cerr << "Error opening file: " << strerror(errno) << std::endl;
     throw std::runtime_error("Unable to open file: " + std::string(filename));
 }
 
