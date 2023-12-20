@@ -12,11 +12,19 @@ GLuint TextureManager::loadTexture(const std::string& filePath) {
     glBindTexture(GL_TEXTURE_2D, textureID);
 
     // Load image using SDL_image
-    SDL_Surface* surface = IMG_Load(filePath.c_str());
-    if (!surface) {
-        // Handle error
-        std::cerr << "Error loading texture: " << IMG_GetError() << std::endl;
-        return 0;
+    SDL_Surface* tempSurface = IMG_Load(filePath.c_str());
+    if (!tempSurface) {
+        std::cerr << "Failed to load texture: " << IMG_GetError() << std::endl;
+        return false;
+    }
+
+
+
+    SDL_Surface* convertedSurface = SDL_ConvertSurfaceFormat(tempSurface, SDL_PIXELFORMAT_ABGR8888, 0);
+    if (!convertedSurface) {
+        std::cerr << "Failed to convert surface format" << std::endl;
+        SDL_FreeSurface(tempSurface);
+        return false;
     }
 
     // Set texture parameters
@@ -26,11 +34,11 @@ GLuint TextureManager::loadTexture(const std::string& filePath) {
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
     // Upload texture data
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, surface->w, surface->h, 0, GL_RGBA, GL_UNSIGNED_BYTE, surface->pixels);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, convertedSurface->w, convertedSurface->h, 0, GL_RGBA, GL_UNSIGNED_BYTE, convertedSurface->pixels);
     glGenerateMipmap(GL_TEXTURE_2D);
 
     // Clean up
-    SDL_FreeSurface(surface);
+    SDL_FreeSurface(convertedSurface);
     glBindTexture(GL_TEXTURE_2D, 0);
 
     return textureID;
