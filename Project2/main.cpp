@@ -31,14 +31,15 @@ int main(int argc, char* argv[]) {
             Vertex(glm::vec3(-0.25f, 0.25f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec2(1.0f, 0.0f)),
     };
 
+    // Creating transformation objects for each rectangle
     Transform* transform1 = new Transform();
     Transform* transform2 = new Transform();
-
+    // Creating an SDL manager to handle events and window management
     SDLManager* sdlManager = new SDLManager();
-
+    // Creating buffer managers for each rectangle
     BufferManager* rectangleBuffer1 = new BufferManager(vertices1, 4);
     BufferManager* rectangleBuffer2 = new BufferManager(vertices2, 4);
-
+    // Creating texture managers for each rectangle and load textures
     TextureManager* textureManager1 = new TextureManager();
     textureManager1->loadTexture("./Shaders/cat.jpg");
     //textureManager1->loadTexture("/Users/emirhankilic/Desktop/3.1/mte391/project/MTE391_Project2/Project2/Shaders/cat.jpg");// Replace with the actual path to the first texture
@@ -54,22 +55,22 @@ int main(int argc, char* argv[]) {
     renderer->init();
 
     // Main loop
-    float speed = 0.01f; // Movement speed
     bool running = true;
     while (running) {
+        // Handling SDL events and update transformations
         sdlManager->handleEvents(&running, transform1, transform2);
 
-        // Clear the screen
+        // Clearing the screen
         glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        // Draw the first rectangle using the renderer
+        // Drawing the first rectangle using the renderer
         renderer->render(transform1, rectangleBuffer1, textureManager1);
 
-        // Draw the second rectangle using the renderer
+        // Drawing the second rectangle using the renderer
         renderer->render(transform2, rectangleBuffer2, textureManager2);
 
-        // Swap buffers
+        // Swapping buffers
         sdlManager->swap();
     }
 

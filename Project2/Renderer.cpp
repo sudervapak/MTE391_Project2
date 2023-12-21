@@ -19,7 +19,7 @@ void Renderer::init() {
 
     // Create and link shaders, set up any other OpenGL configurations
     /*shader = new ShaderManager("/Users/emirhankilic/Desktop/3.1/mte391/project/MTE391_Project2/Project2/Shaders/default.vert",
-                               "/Users/emirhankilic/Desktop/3.1/mte391/project/MTE391_Project2/Project2/Shaders/default.frag"); */ //this for macOS
+                               "/Users/emirhankilic/Desktop/3.1/mte391/project/MTE391_Project2/Project2/Shaders/default.frag");*/ //this for macOS
 
     shader = new ShaderManager("./Shaders/default.vert",
                                "./Shaders/default.frag");   //this is for windows
