@@ -11,14 +11,14 @@
 
 class Renderer {
 public:
-    Renderer();
-    ~Renderer();
+    Renderer(); // Constructor to initialize the Renderer
+    ~Renderer(); // Destructor
 
     void init();
-    void render(Transform* transform, BufferManager* buffer, TextureManager* textureManager);
+    void render(Transform* transform, BufferManager* buffer, TextureManager* textureManager); // Render an object with a given transformation, buffer, and texture
 
 private:
-    ShaderManager* shader;
+    ShaderManager* shader; //shader manager object
 };
 
 #endif // RENDERER_H

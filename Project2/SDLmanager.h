@@ -12,7 +12,7 @@ class SDLManager
 		SDLManager();//initial Setup
 		~SDLManager();//final wrap up
 		void handleEvents(bool* running,Transform * transform, Transform* transform1);// keyboard input etc
-		SDL_Window* getWindow();
+		SDL_Window* getWindow(); //creating window
 		void swap();
 	private:
 		SDL_Window* window;

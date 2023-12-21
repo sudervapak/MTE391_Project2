@@ -1,6 +1,7 @@
 #include "Transform.h"
 #include <iostream>
 
+// Constructor for Transform class, initializes position, rotation, scale, model matrix, and update flag
 Transform::Transform(const glm::vec3& position,
     const glm::vec3& rotation,
     const glm::vec3& scale) :
@@ -11,7 +12,7 @@ Transform::Transform(const glm::vec3& position,
     needsUpdate(true) {
 }
 
-
+// Handle key input for translation operations for  first object
 void Transform::HandleKeyInput(SDL_Keycode key) {
     switch (key) {
     case SDLK_UP:
@@ -44,19 +45,19 @@ void Transform::HandleKeyInput(SDL_Keycode key) {
     case SDLK_p:
         Rotate(glm::radians(-45.0f), glm::vec3(0.0f, 0.0f, 1.0f));
         break;
-        // Add more cases as needed
+
         case SDLK_z:
             Scale(glm::vec3(0.1f, 0.1f, 0.1f));
             break;
         case SDLK_x:
             Scale(glm::vec3(-0.1f, -0.1f, -0.1f));
             break;
-            // Add more cases as needed
+
 
     }
 }
 
-
+// Handle key input for translation operations for  second object
 void Transform::HandleKeyInput1(SDL_Keycode key) {
     switch (key) {
         case SDLK_w:
@@ -74,13 +75,13 @@ void Transform::HandleKeyInput1(SDL_Keycode key) {
 
     }
 }
-
+// Translate the object by a specified delta vector
 void Transform::Translate(const glm::vec3& delta) {
     
     position += delta;
     needsUpdate= true;
 }
-
+// Rotate the object by a specified angle around a specified axis
 void Transform::Rotate(float angle, const glm::vec3& axis) {
     
     if (axis.x > 0.0f) rotation.x += angle;
@@ -88,12 +89,12 @@ void Transform::Rotate(float angle, const glm::vec3& axis) {
     if (axis.z > 0.0f) rotation.z += angle;
     needsUpdate = true;
 }
-
+// Scale the object by a specified delta vector
 void Transform::Scale(const glm::vec3& delta) {
 	scale += delta;
 	needsUpdate = true;
 }
-
+// Update the model matrix based on position, rotation, and scale
 void Transform::UpdateModelMatrix()  {
     
     model = glm::mat4(1.0f);
@@ -104,12 +105,11 @@ void Transform::UpdateModelMatrix()  {
     model = glm::scale(model, scale);
     needsUpdate = false;
 }
-
+// Get the model matrix for rendering
 const glm::mat4 Transform::GetModelMatrix()  {
     if (needsUpdate) {
 		UpdateModelMatrix();
 	}
-    //std::cout << "Transform::GetModel" << std::endl;
 
     return model;
 }

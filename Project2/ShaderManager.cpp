@@ -23,7 +23,7 @@ ShaderManager::ShaderManager(const char* vertexFile, const char* fragmentFile)
          fragmentShader(0),
          shaderProgram(0)
 {
-
+    // Read shader source code from files
     std::string vertexCode = get_file_contents(vertexFile);
     std::string fragmentCode = get_file_contents(fragmentFile);
 
@@ -49,18 +49,19 @@ ShaderManager::ShaderManager(const char* vertexFile, const char* fragmentFile)
     glDeleteShader(fragmentShader);
     glDeleteShader(vertexShader);
 
-
+    // Use the shader program
     glUseProgram(shaderProgram);
 
 }
 
 GLuint ShaderManager::getProgramId() { return shaderProgram; }
-
+// Function to activate the shader program for rendering
 ShaderManager::~ShaderManager() {
 
     glDeleteProgram(shaderProgram);
 
 }
+// Function to get the ID of the shader program
 void ShaderManager::run() {
 
     glUseProgram(shaderProgram);

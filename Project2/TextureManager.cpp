@@ -45,8 +45,8 @@ GLuint TextureManager::loadTexture(const std::string& filePath) {
 }
 
 void TextureManager::bindTexture(GLuint textureUnit) {
-    glActiveTexture(GL_TEXTURE0 + textureUnit);
-    glBindTexture(GL_TEXTURE_2D, textureID);
+    glActiveTexture(GL_TEXTURE0 + textureUnit);// Activate the specified texture unit
+    glBindTexture(GL_TEXTURE_2D, textureID); // Bind the texture to the active texture unit
 }
 
 

@@ -8,7 +8,7 @@ SDLManager::SDLManager() {
     // Initialize SDL
     if (SDL_Init(SDL_INIT_VIDEO) != 0) {
         std::cerr << "SDL_Init Error: " << SDL_GetError() << std::endl;
-        //return 1;
+
     }
 
     // Set OpenGL attributes
@@ -22,7 +22,7 @@ SDLManager::SDLManager() {
     if (window == nullptr) {
         std::cerr << "SDL_CreateWindow Error: " << SDL_GetError() << std::endl;
         SDL_Quit();
-        //return 1;
+
     }
 
     // Create OpenGL context
@@ -31,7 +31,7 @@ SDLManager::SDLManager() {
         std::cerr << "SDL_GL_CreateContext Error: " << SDL_GetError() << std::endl;
         SDL_DestroyWindow(window);
         SDL_Quit();
-       // return 1;
+
     }
 
     // Initialize GLEW
@@ -41,11 +41,8 @@ SDLManager::SDLManager() {
         SDL_GL_DeleteContext(context);
         SDL_DestroyWindow(window);
         SDL_Quit();
-       // return 1;
+
     }
-
-
-
 
 }
 SDLManager::~SDLManager() {
@@ -55,13 +52,13 @@ SDLManager::~SDLManager() {
     SDL_Quit();
 
 }
-
+// Get the SDL window
 SDL_Window*  SDLManager:: getWindow(){
 
     return window;
 
 }
-
+// Handle SDL events, such as quitting the application or handling key inputs for transformations
 void SDLManager::handleEvents(bool * running, Transform* transform, Transform* transform1) {
 
     SDL_Event event;
@@ -81,5 +78,5 @@ void SDLManager::handleEvents(bool * running, Transform* transform, Transform* t
 
 void SDLManager::swap() {
 
-    SDL_GL_SwapWindow(window);
+    SDL_GL_SwapWindow(window);// Swap the front and back buffers to update the window display
  }
