@@ -40,11 +40,13 @@ int main(int argc, char* argv[]) {
     BufferManager* rectangleBuffer2 = new BufferManager(vertices2, 4);
 
     TextureManager* textureManager1 = new TextureManager();
-    textureManager1->loadTexture("/Users/emirhankilic/Desktop/3.1/mte391/project/MTE391_Project2/Project2/Shaders/cat.jpg");  // Replace with the actual path to the first texture
+    textureManager1->loadTexture("./Shaders/cat.jpg");
+    //textureManager1->loadTexture("/Users/emirhankilic/Desktop/3.1/mte391/project/MTE391_Project2/Project2/Shaders/cat.jpg");// Replace with the actual path to the first texture
     textureManager1->bindTexture(0);
 
     TextureManager* textureManager2 = new TextureManager();
-    textureManager2->loadTexture("/Users/emirhankilic/Desktop/3.1/mte391/project/MTE391_Project2/Project2/Shaders/cat2.jpg");  // Replace with the actual path to the second texture
+    //textureManager2->loadTexture("/Users/emirhankilic/Desktop/3.1/mte391/project/MTE391_Project2/Project2/Shaders/cat2.jpg");  // Replace with the actual path to the second texture
+    textureManager2->loadTexture("./Shaders/cat2.jpg");
     textureManager2->bindTexture(1);
 
     // Create a renderer instance and initialize it
