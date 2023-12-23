@@ -1,3 +1,8 @@
+/* ShaderManager, serves as a straightforward tool for handling shaders.
+It handles the process of loading shader source code from files, compiling individual shaders (vertex and fragment), linking them into a complete shader program, and ensuring proper cleanup when the program ends.
+The run method is available to activate the shader program, making it ready for rendering.
+In essence, this class provides a convenient and organized way to work with shaders in OpenGL, simplifying the management of their lifecycle.*/
+
 #pragma once
 #include <SDL.h>
 #include <GL/glew.h>

@@ -1,3 +1,9 @@
+/* This project is a simple application using SDL for window management and rendering.
+ It creates two rectangles with different textures and allows users to control their transformations through user input.
+ The main loop handles SDL events, clears the screen, renders the rectangles using a renderer, and swaps buffers to display the output.
+ The program runs until the user closes the window or exits the application.
+ Overall, it provides a basic structure for an interactive OpenGL scene with textured rectangles.*/
+
 #include <SDL.h>
 #include <GL/glew.h>
 #include <iostream>

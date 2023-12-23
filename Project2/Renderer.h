@@ -1,3 +1,6 @@
+/*Renderer class provides an interface between the Renderer, ShaderManager, TextureManager and BufferManager classes and integrates these components, giving the ability to display a simple graphics scene.
+ The Renderer class is used in the project to render objects using predefined shaders, add textures, and provide simple camera controls.*/
+
 #ifndef RENDERER_H
 #define RENDERER_H
 

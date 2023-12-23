@@ -1,3 +1,8 @@
+/*In this project, the `Transform` class is used to manage the position, rotation and scale of the objects in the project in their coordinates in the window.
+ It is used to determine the position of an object in the scene, rotate it and size it. This class creates the model matrix of an object and determines the object's location in the scene.
+ This class allows animation and user interaction by updating the positions of objects. It also allows objects to dynamically move, rotate or change size by reacting to keyboard input from the user.
+ Shortly, this  class is used to regulate the movement and appearance of objects in the scene and simplifies the process of locating objects in the scene  in a basic graphics application.
+ */
 
 #ifndef TRANSFORM_H
 #define TRANSFORM_H
