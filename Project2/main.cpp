@@ -38,8 +38,8 @@ int main(int argc, char* argv[]) {
     };
 
     // Creating transformation objects for each rectangle
-    Transform* transform1 = new Transform();
-    Transform* transform2 = new Transform();
+    Transform* transform1 = new Transform(); //First object can be controlled with the keys ( UP DOWN LEFT RIGHT t y u i o p z x)
+    Transform* transform2 = new Transform();//Second object can be controlled with the keys ( w a s d)
     // Creating an SDL manager to handle events and window management
     SDLManager* sdlManager = new SDLManager();
     // Creating buffer managers for each rectangle
